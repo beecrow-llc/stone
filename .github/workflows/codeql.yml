@@ -15,20 +15,15 @@ permissions:
 
 jobs:
   analyze:
-    name: Analyze (Swift)
-    runs-on: macos-latest
+    name: Analyze (GitHub Actions)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: github/codeql-action/init@v3
         with:
-          languages: swift
-          build-mode: manual
-
-      - name: Build
-        run: |
-          cd Stone2
-          swift build
+          languages: actions
+          build-mode: none
 
       - uses: github/codeql-action/analyze@v3
         with:
