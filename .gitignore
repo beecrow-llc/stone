@@ -1,3 +1,6 @@
 .DS_Store
 .build
 .planning
+.idea/
+Stone.xcodeproj/xcuserdata/
+Stone.xcodeproj/project.xcworkspace/xcuserdata/
