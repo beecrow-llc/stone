@@ -31,3 +31,5 @@ jobs:
           swift build
 
       - uses: github/codeql-action/analyze@v3
+        with:
+          upload: never
