@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone — Menu Bar Time Tracker for Freelancers</title>
+  <meta name="description" content="Track time from your Mac menu bar. Projects, reports, CloudKit sync. Built for freelancers who want simplicity, not surveillance.">
+  <meta name="author" content="BeeCrow, LLC">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0f0f1a">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://stone.beecrow.llc/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stone.beecrow.llc/">
+  <meta property="og:title" content="Stone — Menu Bar Time Tracker for Freelancers">
+  <meta property="og:description" content="Track time from your Mac menu bar. Projects, reports, iCloud sync. No accounts, no surveillance.">
+  <meta property="og:image" content="https://stone.beecrow.llc/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Stone">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stone — Menu Bar Time Tracker for Freelancers">
+  <meta name="twitter:description" content="Track time from your Mac menu bar. Projects, reports, iCloud sync.">
+  <meta name="twitter:image" content="https://stone.beecrow.llc/og-image.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Stone",
+    "description": "Menu bar time tracker for freelancers on macOS",
+    "url": "https://stone.beecrow.llc",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "macOS 14+",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "BeeCrow, LLC",
+      "url": "https://beecrow.llc"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏱</text></svg>">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --primary: #10b981;
+      --secondary: #34d399;
+      --text: #eaeaea;
+      --text-muted: #8b8b8b;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; line-height: 1.6;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 24px 0; position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(15, 15, 26, 0.9); backdrop-filter: blur(10px); z-index: 100;
+    }
+    .header-content { display: flex; justify-content: space-between; align-items: center; }
+    .logo {
+      font-size: 24px; font-weight: 700; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+    }
+    .logo-icon {
+      width: 32px; height: 32px; background: var(--primary);
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-size: 18px;
+    }
+
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; padding-top: 80px;
+    }
+    .hero-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .hero-text h1 { font-size: 52px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
+    .hero-text h1 span { color: var(--primary); }
+    .hero-text p { font-size: 20px; color: var(--text-muted); margin-bottom: 40px; max-width: 480px; }
+
+    .btn {
+      padding: 16px 32px; border-radius: 12px; font-size: 16px;
+      font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--primary); color: #111;
+      box-shadow: 0 4px 24px rgba(16, 185, 129, 0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4); }
+
+    .hero-visual { display: flex; justify-content: center; }
+
+    .menubar-mockup {
+      width: 320px; background: var(--surface); border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .menubar-header {
+      padding: 14px 16px; background: rgba(255,255,255,0.03);
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .menubar-timer { font-size: 18px; font-weight: 700; color: var(--primary); font-variant-numeric: tabular-nums; }
+    .menubar-stop {
+      background: rgba(239, 68, 68, 0.2); color: #ef4444;
+      padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    }
+
+    .project-list { padding: 8px; }
+    .project-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px; cursor: default;
+    }
+    .project-row:hover { background: rgba(255,255,255,0.03); }
+    .project-row.active { background: rgba(16, 185, 129, 0.1); }
+    .project-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .project-name { font-size: 14px; flex: 1; }
+    .project-time { font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+    .menubar-footer {
+      padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex; gap: 16px; font-size: 13px; color: var(--text-muted);
+    }
+    .menubar-footer a { color: var(--text-muted); text-decoration: none; }
+
+    .features { padding: 120px 0; }
+    .features h2 { font-size: 40px; text-align: center; margin-bottom: 64px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .feature-card {
+      background: var(--surface); padding: 32px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .feature-icon { font-size: 40px; margin-bottom: 20px; }
+    .feature-card h3 { font-size: 20px; margin-bottom: 12px; }
+    .feature-card p { color: var(--text-muted); font-size: 15px; }
+
+    .philosophy { padding: 120px 0; background: var(--surface); }
+    .philosophy h2 { font-size: 40px; text-align: center; margin-bottom: 64px; }
+    .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 800px; margin: 0 auto; }
+    .philosophy-item h3 { font-size: 18px; margin-bottom: 8px; }
+    .philosophy-item p { color: var(--text-muted); font-size: 15px; }
+
+    footer {
+      padding: 48px 0; text-align: center; color: var(--text-muted); font-size: 14px;
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+
+    @media (max-width: 968px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 48px; }
+      .hero-text p { margin-left: auto; margin-right: auto; }
+      .features-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero-text h1 { font-size: 36px; }
+      .menubar-mockup { width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <a href="/" class="logo">
+        <div class="logo-icon">⏱</div>
+        Stone
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Time tracking <span>that stays out of the way</span></h1>
+        <p>A menu bar timer for freelancers. Start, stop, switch projects — all from the top of your screen. Reports, iCloud sync, no accounts required.</p>
+        <a href="#" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download for macOS
+        </a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="menubar-mockup">
+          <div class="menubar-header">
+            <span class="menubar-timer">02:34:15</span>
+            <span class="menubar-stop">Stop</span>
+          </div>
+          <div class="project-list">
+            <div class="project-row active">
+              <div class="project-dot" style="background: #10b981;"></div>
+              <span class="project-name">Freelance: Website</span>
+              <span class="project-time">2:34</span>
+            </div>
+            <div class="project-row">
+              <div class="project-dot" style="background: #6366f1;"></div>
+              <span class="project-name">Client: Logo Design</span>
+              <span class="project-time">1:15</span>
+            </div>
+            <div class="project-row">
+              <div class="project-dot" style="background: #f59e0b;"></div>
+              <span class="project-name">Internal: Admin</span>
+              <span class="project-time">0:45</span>
+            </div>
+            <div class="project-row">
+              <div class="project-dot" style="background: #ef4444;"></div>
+              <span class="project-name">Client: App MVP</span>
+              <span class="project-time">3:20</span>
+            </div>
+          </div>
+          <div class="menubar-footer">
+            <span>Today: 7h 54m</span>
+            <a href="#">Reports</a>
+            <a href="#">Preferences</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>Built for Focus</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⏱</div>
+          <h3>Menu Bar Timer</h3>
+          <p>Elapsed time in the menu bar. One click to start, stop, or switch projects. Never leave your work.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Visual Reports</h3>
+          <p>Daily, weekly, and monthly breakdowns. Pie charts, bar charts, and CSV export for invoicing.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">☁️</div>
+          <h3>iCloud Sync</h3>
+          <p>CloudKit sync across your Macs. No accounts, no logins — just your iCloud credentials.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy">
+    <div class="container">
+      <h2>Our Approach</h2>
+      <div class="philosophy-grid">
+        <div class="philosophy-item">
+          <h3>Manual tracking only</h3>
+          <p>You decide when to start and stop. We don't monitor your apps, websites, or keystrokes.</p>
+        </div>
+        <div class="philosophy-item">
+          <h3>No accounts required</h3>
+          <p>Download and use. Data stays local with optional iCloud sync. No server, no sign-up.</p>
+        </div>
+        <div class="philosophy-item">
+          <h3>Idle detection</h3>
+          <p>Detects when you step away and asks what to do with idle time when you return.</p>
+        </div>
+        <div class="philosophy-item">
+          <h3>Billable hours</h3>
+          <p>Set hourly rates per project. Reports show both time and revenue for invoicing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Your data stays on your Mac. No tracking, no analytics, no surveillance.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · &copy; 2026 <a href="https://beecrow.llc">BeeCrow, LLC</a></p>
+    </div>
+  </footer>
+</body>
+</html>
