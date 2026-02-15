@@ -1,0 +1,5 @@
+# Redirect pages.dev to production domain
+https://stone-5v4.pages.dev/* https://stone.beecrow.llc/:splat 301
+
+# Static site fallback
+/*  /index.html  200
